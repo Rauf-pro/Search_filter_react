@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useState } from "react";
 
-function App() {
+import { Footer } from "./components/footer";
+import { NamePicker } from "./components/name-picker";
+import { ResetSearch } from "./components/reset-search";
+import { Search } from "./components/search";
+import { ShortList } from "./components/short-list";
+
+function App({ names }) {
+  const [searchValue, setSearchValue] = useState("");
+  const [shortList, setShortList] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+      <main>
+        <ShortList
+          names={names}
+          shortList={shortList}
+          setShortList={setShortList}
+        />
+        <NamePicker
+          names={names}
+          searchValue={searchValue}
+          shortList={shortList}
+          setShortList={setShortList}
+        />
+        <ResetSearch
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+      </main>
+      <Footer />
+    </Fragment>
   );
 }
+
+
 
 export default App;
